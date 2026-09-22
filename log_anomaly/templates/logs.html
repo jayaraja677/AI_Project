@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sentinel AI | Log Data</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+
+    <div class="sidebar-brand">
+
+        <div class="sidebar-logo">
+            🛡️
+        </div>
+
+        <div>
+
+            <h2>
+                SENTINEL <span>AI</span>
+            </h2>
+
+            <small>
+                SECURITY PLATFORM
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+
+        <p class="nav-title">
+            MONITORING
+        </p>
+
+
+        <a href="/dashboard"
+           class="nav-item">
+
+            📊
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="/logs"
+           class="nav-item active">
+
+            📁
+            <span>Log Data</span>
+
+        </a>
+
+
+        <a href="#"
+           class="nav-item">
+
+            ⚠️
+            <span>Anomalies</span>
+
+        </a>
+
+
+        <p class="nav-title">
+            ANALYSIS
+        </p>
+
+
+        <a href="#"
+           class="nav-item">
+
+            📈
+            <span>Analytics</span>
+
+        </a>
+
+
+        <a href="#"
+           class="nav-item">
+
+            📄
+            <span>Reports</span>
+
+        </a>
+
+
+        <p class="nav-title">
+            SYSTEM
+        </p>
+
+
+        <a href="#"
+           class="nav-item">
+
+            ⚙️
+            <span>Settings</span>
+
+        </a>
+
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+
+                <strong>
+                    System Online
+                </strong>
+
+                <small>
+                    Monitoring active
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a href="/logout"
+           class="logout-link">
+
+            🚪 Logout
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="dashboard-main">
+
+
+    <header class="topbar">
+
+
+        <div>
+
+            <h1>
+                Log Data
+            </h1>
+
+            <p>
+                Upload and analyze security log files
+            </p>
+
+        </div>
+
+
+        <div class="admin-area">
+
+            <div class="online-indicator">
+
+                <span class="status-dot"></span>
+
+                SYSTEM ONLINE
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <small>
+                        Security Admin
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- UPLOAD -->
+
+    <section class="dashboard-card upload-card">
+
+
+        <div class="upload-header">
+
+
+            <div class="upload-icon">
+                📁
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Upload Security Logs
+                </h2>
+
+                <p>
+                    Upload your security log file for AI-powered analysis
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        {% if error %}
+
+        <div class="error-message">
+            ⚠ {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <form action="/upload"
+              method="POST"
+              enctype="multipart/form-data">
+
+
+            <div class="drop-zone">
+
+
+                <div class="drop-icon">
+                    ☁️
+                </div>
+
+
+                <h3>
+                    Upload your log file
+                </h3>
+
+
+                <p>
+                    Drag & drop your file here or choose a file
+                </p>
+
+
+                <label class="browse-button">
+
+                    Browse Files
+
+                    <input
+                        type="file"
+                        name="logfile"
+                        accept=".log,.txt,.csv"
+                        required
+                        hidden>
+
+                </label>
+
+
+                <span class="supported-files">
+
+                    Supported formats:
+                    .LOG
+                    .TXT
+                    .CSV
+
+                </span>
+
+
+            </div>
+
+
+            <div class="upload-actions">
+
+                <button
+                    type="submit"
+                    class="process-button">
+
+                    🔍 PROCESS LOG
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </section>
+
+
+    <!-- INFORMATION -->
+
+    <section class="upload-info-grid">
+
+
+        <div class="dashboard-card info-card">
+
+            <div class="info-icon">
+                📄
+            </div>
+
+            <div>
+
+                <h3>
+                    Log Processing
+                </h3>
+
+                <p>
+                    Security logs will be parsed and converted
+                    into structured records.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-card info-card">
+
+            <div class="info-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <h3>
+                    AI Analysis
+                </h3>
+
+                <p>
+                    Processed logs will later be analyzed
+                    by the anomaly detection model.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-card info-card">
+
+            <div class="info-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <h3>
+                    Secure Processing
+                </h3>
+
+                <p>
+                    Uploaded files are handled by the
+                    Sentinel AI backend.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- PROCESSED LOGS -->
+
+    <section class="dashboard-card recent-card">
+
+
+        <div class="card-header">
+
+
+            <div>
+
+                <h3>
+                    Processed Log Records
+                </h3>
+
+
+                {% if filename %}
+
+                <p>
+                    File: {{ filename }}
+                </p>
+
+                {% else %}
+
+                <p>
+                    Uploaded security events will appear here
+                </p>
+
+                {% endif %}
+
+            </div>
+
+
+        </div>
+
+
+        {% if records %}
+
+
+        <div class="log-table-container">
+
+
+            <table class="log-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        {% for key in records[0].keys() %}
+
+                        <th>
+                            {{ key }}
+                        </th>
+
+                        {% endfor %}
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for record in records %}
+
+                    <tr>
+
+                        {% for value in record.values() %}
+
+                        <td>
+                            {{ value }}
+                        </td>
+
+                        {% endfor %}
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-state">
+
+
+            <div class="empty-icon">
+                📂
+            </div>
+
+
+            <h3>
+                No logs processed yet
+            </h3>
+
+
+            <p>
+                Upload a security log file to begin analysis.
+            </p>
+
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

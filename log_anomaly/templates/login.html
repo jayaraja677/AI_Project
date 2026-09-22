@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sentinel AI | Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="login-page">
+
+
+    <!-- BRAND -->
+
+    <div class="login-brand">
+
+        <div class="brand-shield">
+            🛡️
+        </div>
+
+        <div>
+
+            <h1>
+                SENTINEL <span>AI</span>
+            </h1>
+
+            <small>
+                SECURITY INTELLIGENCE PLATFORM
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOGIN CARD -->
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            🔐
+        </div>
+
+
+        <h2>
+            Security Monitor
+        </h2>
+
+
+        <p class="login-subtitle">
+            AI-Based Security Log Anomaly Detection
+        </p>
+
+
+        {% if error %}
+
+        <div class="login-error">
+            ⚠ {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <form action="/login"
+              method="POST">
+
+
+            <label>
+                USERNAME
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter administrator username"
+                required
+            >
+
+
+            <label>
+                PASSWORD
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter secure password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="login-button">
+
+                SIGN IN
+                <span>→</span>
+
+            </button>
+
+
+        </form>
+
+
+        <div class="secure-connection">
+
+            <span></span>
+
+            SECURE CONNECTION
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
