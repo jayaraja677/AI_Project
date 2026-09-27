@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sentinel AI | Analytics</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- BRAND -->
+
+    <div class="sidebar-brand">
+
+        <div class="sidebar-logo">
+            🛡️
+        </div>
+
+        <div>
+
+            <h2>
+                SENTINEL <span>AI</span>
+            </h2>
+
+            <small>
+                SECURITY PLATFORM
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         NAVIGATION
+    ================================================== -->
+
+    <nav class="sidebar-nav">
+
+
+        <!-- MONITORING -->
+
+        <p class="nav-title">
+            MONITORING
+        </p>
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item">
+
+            📊
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="{{ url_for('logs') }}"
+           class="nav-item">
+
+            📁
+            <span>Log Data</span>
+
+        </a>
+
+
+        <a href="{{ url_for('anomalies') }}"
+           class="nav-item">
+
+            ⚠️
+            <span>Anomalies</span>
+
+        </a>
+
+
+        <!-- ANALYSIS -->
+
+        <p class="nav-title">
+            ANALYSIS
+        </p>
+
+
+        <a href="{{ url_for('analytics') }}"
+           class="nav-item active">
+
+            📈
+            <span>Analytics</span>
+
+        </a>
+
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item">
+
+            📄
+            <span>Reports</span>
+
+        </a>
+
+
+        <!-- SYSTEM -->
+
+        <p class="nav-title">
+            SYSTEM
+        </p>
+
+
+        <a href="{{ url_for('settings') }}"
+           class="nav-item">
+
+            ⚙️
+            <span>Settings</span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- =================================================
+         SIDEBAR BOTTOM
+    ================================================== -->
+
+    <div class="sidebar-bottom">
+
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+
+                <strong>
+                    System Online
+                </strong>
+
+                <small>
+                    Monitoring active
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a href="{{ url_for('logout') }}"
+           class="logout-link">
+
+            🚪 Logout
+
+        </a>
+
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="dashboard-main">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+
+        <div>
+
+            <h1>
+                Analytics
+            </h1>
+
+            <p>
+                Security log statistics and activity analysis
+            </p>
+
+        </div>
+
+
+        <div class="admin-area">
+
+
+            <div class="online-indicator">
+
+                <span class="status-dot"></span>
+
+                SYSTEM ONLINE
+
+            </div>
+
+
+            <div class="admin-profile">
+
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <small>
+                        Security Admin
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         STATISTICS CARDS
+    ================================================== -->
+
+    <section class="stats-grid">
+
+
+        <!-- TOTAL LOGS -->
+
+        <div class="dashboard-card stat-card">
+
+
+            <div class="stat-icon">
+                📄
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Total Logs
+                </h3>
+
+                <strong>
+                    {{ total_logs }}
+                </strong>
+
+                <p>
+                    Processed security records
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- SUCCESSFUL LOGINS -->
+
+        <div class="dashboard-card stat-card">
+
+
+            <div class="stat-icon">
+                🔐
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Successful Logins
+                </h3>
+
+                <strong>
+                    {{ successful_logins }}
+                </strong>
+
+                <p>
+                    Successful authentication events
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- FAILED LOGINS -->
+
+        <div class="dashboard-card stat-card">
+
+
+            <div class="stat-icon">
+                ⚠️
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Failed Logins
+                </h3>
+
+                <strong>
+                    {{ failed_logins }}
+                </strong>
+
+                <p>
+                    Failed authentication events
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- UNIQUE IPS -->
+
+        <div class="dashboard-card stat-card">
+
+
+            <div class="stat-icon">
+                🌐
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Unique IPs
+                </h3>
+
+                <strong>
+                    {{ unique_ips }}
+                </strong>
+
+                <p>
+                    Different IP addresses
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ANOMALY SUMMARY
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Anomaly Summary
+                </h3>
+
+                <p>
+                    Security anomalies detected in uploaded logs
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+
+            <!-- TOTAL -->
+
+            <div class="mini-stat">
+
+                <span class="mini-stat-icon">
+                    ⚠️
+                </span>
+
+                <div>
+
+                    <strong>
+                        {{ total_anomalies }}
+                    </strong>
+
+                    <span>
+                        Total Anomalies
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HIGH -->
+
+            <div class="mini-stat">
+
+                <span class="mini-stat-icon high-icon">
+                    🔴
+                </span>
+
+                <div>
+
+                    <strong>
+                        {{ high_anomalies }}
+                    </strong>
+
+                    <span>
+                        High Severity
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MEDIUM -->
+
+            <div class="mini-stat">
+
+                <span class="mini-stat-icon medium-icon">
+                    🟡
+                </span>
+
+                <div>
+
+                    <strong>
+                        {{ medium_anomalies }}
+                    </strong>
+
+                    <span>
+                        Medium Severity
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         EVENT DISTRIBUTION
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Event Distribution
+                </h3>
+
+                <p>
+                    Number of security events by event type
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if event_data %}
+
+
+        <div class="log-table-container">
+
+
+            <table class="log-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Event
+                        </th>
+
+                        <th>
+                            Number of Events
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for event, count in event_data %}
+
+                    <tr>
+
+                        <td>
+                            {{ event }}
+                        </td>
+
+                        <td>
+                            {{ count }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                📊
+            </div>
+
+            <h3>
+                No event data available
+            </h3>
+
+            <p>
+                Upload a log file to generate analytics.
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         TOP IP ADDRESSES
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Top IP Addresses
+                </h3>
+
+                <p>
+                    IP addresses with the highest number of events
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if top_ips %}
+
+
+        <div class="log-table-container">
+
+
+            <table class="log-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            IP Address
+                        </th>
+
+                        <th>
+                            Number of Events
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for ip, count in top_ips %}
+
+                    <tr>
+
+                        <td>
+                            {{ ip }}
+                        </td>
+
+                        <td>
+                            {{ count }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                🌐
+            </div>
+
+            <h3>
+                No IP data available
+            </h3>
+
+            <p>
+                Upload a log file to generate IP statistics.
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ANALYTICS INFORMATION
+    ================================================== -->
+
+    <section class="upload-info-grid">
+
+
+        <div class="dashboard-card info-card">
+
+
+            <div class="info-icon">
+                📊
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Log Analysis
+                </h3>
+
+                <p>
+                    The system analyzes uploaded security records
+                    to identify authentication and activity patterns.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="dashboard-card info-card">
+
+
+            <div class="info-icon">
+                🤖
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Anomaly Detection
+                </h3>
+
+                <p>
+                    Detected anomalies are summarized according to
+                    their severity level.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="dashboard-card info-card">
+
+
+            <div class="info-icon">
+                🔐
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Security Monitoring
+                </h3>
+
+                <p>
+                    IP addresses, login activity and event types
+                    are monitored from the uploaded logs.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

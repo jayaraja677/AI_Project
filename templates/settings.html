@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sentinel AI | Settings</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- BRAND -->
+
+    <div class="sidebar-brand">
+
+        <div class="sidebar-logo">
+            🛡️
+        </div>
+
+        <div>
+
+            <h2>
+                SENTINEL <span>AI</span>
+            </h2>
+
+            <small>
+                SECURITY PLATFORM
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="sidebar-nav">
+
+
+        <!-- MONITORING -->
+
+        <p class="nav-title">
+            MONITORING
+        </p>
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item">
+
+            📊
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="{{ url_for('logs') }}"
+           class="nav-item">
+
+            📁
+            <span>Log Data</span>
+
+        </a>
+
+
+        <a href="{{ url_for('anomalies') }}"
+           class="nav-item">
+
+            ⚠️
+            <span>Anomalies</span>
+
+        </a>
+
+
+        <!-- ANALYSIS -->
+
+        <p class="nav-title">
+            ANALYSIS
+        </p>
+
+
+        <a href="{{ url_for('analytics') }}"
+           class="nav-item">
+
+            📈
+            <span>Analytics</span>
+
+        </a>
+
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item">
+
+            📄
+            <span>Reports</span>
+
+        </a>
+
+
+        <!-- SYSTEM -->
+
+        <p class="nav-title">
+            SYSTEM
+        </p>
+
+
+        <a href="{{ url_for('settings') }}"
+           class="nav-item active">
+
+            ⚙️
+            <span>Settings</span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- SIDEBAR BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+
+                <strong>
+                    System Online
+                </strong>
+
+                <small>
+                    Monitoring active
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a href="{{ url_for('logout') }}"
+           class="logout-link">
+
+            🚪 Logout
+
+        </a>
+
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="dashboard-main">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+
+        <div>
+
+            <h1>
+                Settings
+            </h1>
+
+            <p>
+                Configure Sentinel AI security platform
+            </p>
+
+        </div>
+
+
+        <div class="admin-area">
+
+
+            <div class="online-indicator">
+
+                <span class="status-dot"></span>
+
+                SYSTEM ONLINE
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <small>
+                        Security Admin
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =================================================
+         SYSTEM STATUS
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    System Status
+                </h3>
+
+                <p>
+                    Current Sentinel AI platform status
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="upload-info-grid">
+
+
+            <!-- PLATFORM STATUS -->
+
+            <div class="dashboard-card info-card">
+
+                <div class="info-icon">
+                    🟢
+                </div>
+
+                <div>
+
+                    <h3>
+                        Platform Status
+                    </h3>
+
+                    <p>
+                        System is currently online and operational.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECURITY ENGINE -->
+
+            <div class="dashboard-card info-card">
+
+                <div class="info-icon">
+                    🔐
+                </div>
+
+                <div>
+
+                    <h3>
+                        Security Engine
+                    </h3>
+
+                    <p>
+                        Rule-based anomaly detection engine is active.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- AI DETECTION -->
+
+            <div class="dashboard-card info-card">
+
+                <div class="info-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <h3>
+                        AI Detection
+                    </h3>
+
+                    <p>
+                        ML anomaly detection module is currently under development.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         LOG PROCESSING SETTINGS
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Log Processing
+                </h3>
+
+                <p>
+                    Supported log formats and processing configuration
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-grid">
+
+
+            <!-- CSV -->
+
+            <div class="setting-item">
+
+                <div>
+
+                    <strong>
+                        CSV Files
+                    </strong>
+
+                    <p>
+                        Structured security log files
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    ENABLED
+                </span>
+
+            </div>
+
+
+            <!-- TXT -->
+
+            <div class="setting-item">
+
+                <div>
+
+                    <strong>
+                        TXT Files
+                    </strong>
+
+                    <p>
+                        Plain-text security logs
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    ENABLED
+                </span>
+
+            </div>
+
+
+            <!-- LOG -->
+
+            <div class="setting-item">
+
+                <div>
+
+                    <strong>
+                        LOG Files
+                    </strong>
+
+                    <p>
+                        Standard log files
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    ENABLED
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ANOMALY DETECTION
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Anomaly Detection
+                </h3>
+
+                <p>
+                    Current detection rules used by Sentinel AI
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-grid">
+
+
+            <!-- BRUTE FORCE -->
+
+            <div class="setting-item">
+
+                <div>
+
+                    <strong>
+                        Brute Force Detection
+                    </strong>
+
+                    <p>
+                        Detects repeated failed login attempts.
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <!-- EXTERNAL LOGIN -->
+
+            <div class="setting-item">
+
+                <div>
+
+                    <strong>
+                        External Login Detection
+                    </strong>
+
+                    <p>
+                        Detects failed login attempts from suspicious external IP addresses.
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <!-- FAILED LOGIN THRESHOLD -->
+
+            <div class="setting-item">
+
+                <div>
+
+                    <strong>
+                        Failed Login Threshold
+                    </strong>
+
+                    <p>
+                        Current threshold: 3 failed attempts.
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    3 ATTEMPTS
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ADMINISTRATOR
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Administrator
+                </h3>
+
+                <p>
+                    Current system administrator information
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-grid">
+
+
+            <!-- USERNAME -->
+
+            <div class="setting-item">
+
+                <div>
+
+                    <strong>
+                        Username
+                    </strong>
+
+                    <p>
+                        Administrator account
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    ADMIN
+                </span>
+
+            </div>
+
+
+            <!-- ACCESS LEVEL -->
+
+            <div class="setting-item">
+
+                <div>
+
+                    <strong>
+                        Access Level
+                    </strong>
+
+                    <p>
+                        Full security monitoring access
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    ADMINISTRATOR
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         SYSTEM INFORMATION
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    System Information
+                </h3>
+
+                <p>
+                    Sentinel AI project information
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="system-info">
+
+
+            <div>
+
+                <strong>
+                    Platform
+                </strong>
+
+                <span>
+                    Sentinel AI
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Version
+                </strong>
+
+                <span>
+                    1.0
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Log Engine
+                </strong>
+
+                <span>
+                    Python / Flask
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Detection Engine
+                </strong>
+
+                <span>
+                    Rule-Based Detection
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

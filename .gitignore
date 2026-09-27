@@ -1,0 +1,20 @@
+# Uploaded security logs
+uploads/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+
+# Environment variables / secrets
+.env
+
+# IDE files
+.vscode/
+
+# Python cache files
+*.pyo
+*.pyd

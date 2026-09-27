@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sentinel AI | Anomalies</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- BRAND -->
+
+    <div class="sidebar-brand">
+
+        <div class="sidebar-logo">
+            🛡️
+        </div>
+
+        <div>
+
+            <h2>
+                SENTINEL <span>AI</span>
+            </h2>
+
+            <small>
+                SECURITY PLATFORM
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="sidebar-nav">
+
+
+        <!-- MONITORING -->
+
+        <p class="nav-title">
+            MONITORING
+        </p>
+
+
+        <!-- DASHBOARD -->
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item">
+
+            📊
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!-- LOG DATA -->
+
+        <a href="{{ url_for('logs') }}"
+           class="nav-item">
+
+            📁
+            <span>Log Data</span>
+
+        </a>
+
+
+        <!-- ANOMALIES -->
+
+        <a href="{{ url_for('anomalies') }}"
+           class="nav-item active">
+
+            ⚠️
+            <span>Anomalies</span>
+
+        </a>
+
+
+        <!-- ANALYSIS -->
+
+        <p class="nav-title">
+            ANALYSIS
+        </p>
+
+
+        <!-- ANALYTICS -->
+
+        <a href="{{ url_for('analytics') }}"
+           class="nav-item">
+
+            📈
+            <span>Analytics</span>
+
+        </a>
+
+
+        <!-- REPORTS -->
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item">
+
+            📄
+            <span>Reports</span>
+
+        </a>
+
+
+        <!-- SYSTEM -->
+
+        <p class="nav-title">
+            SYSTEM
+        </p>
+
+
+        <!-- SETTINGS -->
+
+        <a href="{{ url_for('settings') }}"
+           class="nav-item">
+
+            ⚙️
+            <span>Settings</span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- SIDEBAR BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+
+        <!-- SYSTEM STATUS -->
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+
+                <strong>
+                    System Online
+                </strong>
+
+                <small>
+                    Monitoring active
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <a href="{{ url_for('logout') }}"
+           class="logout-link">
+
+            🚪 Logout
+
+        </a>
+
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="dashboard-main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+
+        <div>
+
+            <h1>
+                Anomalies
+            </h1>
+
+            <p>
+                Detected suspicious security activities
+            </p>
+
+        </div>
+
+
+        <div class="admin-area">
+
+
+            <!-- SYSTEM STATUS -->
+
+            <div class="online-indicator">
+
+                <span class="status-dot"></span>
+
+                SYSTEM ONLINE
+
+            </div>
+
+
+            <!-- ADMIN PROFILE -->
+
+            <div class="admin-profile">
+
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <small>
+                        Security Admin
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+    <!-- =================================================
+         SUMMARY CARDS
+    ================================================== -->
+
+    <section class="upload-info-grid">
+
+
+        <!-- TOTAL ANOMALIES -->
+
+        <div class="dashboard-card info-card">
+
+
+            <div class="info-icon">
+                ⚠️
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Total Anomalies
+                </h3>
+
+
+                <p style="font-size: 24px; font-weight: bold;">
+
+                    {{ total_anomalies }}
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- HIGH SEVERITY -->
+
+        <div class="dashboard-card info-card">
+
+
+            <div class="info-icon">
+                🔴
+            </div>
+
+
+            <div>
+
+                <h3>
+                    High Severity
+                </h3>
+
+
+                <p style="font-size: 24px; font-weight: bold;">
+
+                    {{ high_anomalies }}
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- MEDIUM SEVERITY -->
+
+        <div class="dashboard-card info-card">
+
+
+            <div class="info-icon">
+                🟡
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Medium Severity
+                </h3>
+
+
+                <p style="font-size: 24px; font-weight: bold;">
+
+                    {{ medium_anomalies }}
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         ANOMALY TABLE
+    ================================================== -->
+
+    <section class="dashboard-card recent-card">
+
+
+        <div class="card-header">
+
+
+            <div>
+
+                <h3>
+                    Detected Security Anomalies
+                </h3>
+
+
+                <p>
+                    File: {{ filename }}
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             ANOMALIES EXIST
+        ================================================== -->
+
+        {% if anomalies %}
+
+
+        <div class="log-table-container">
+
+
+            <table class="log-table">
+
+
+                <thead>
+
+
+                    <tr>
+
+                        <th>
+                            Type
+                        </th>
+
+                        <th>
+                            Severity
+                        </th>
+
+                        <th>
+                            IP Address
+                        </th>
+
+                        <th>
+                            Username
+                        </th>
+
+                        <th>
+                            Timestamp
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                    </tr>
+
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for anomaly in anomalies %}
+
+
+                    <tr>
+
+
+                        <!-- TYPE -->
+
+                        <td>
+
+                            {{ anomaly.get("type", "Unknown") }}
+
+                        </td>
+
+
+                        <!-- SEVERITY -->
+
+                        <td>
+
+
+                            {% if anomaly.get("severity") == "HIGH" %}
+
+
+                                <span style="
+                                    color:#ff4d4d;
+                                    font-weight:bold;
+                                ">
+
+                                    🔴 HIGH
+
+                                </span>
+
+
+                            {% elif anomaly.get("severity") == "MEDIUM" %}
+
+
+                                <span style="
+                                    color:#ffc107;
+                                    font-weight:bold;
+                                ">
+
+                                    🟡 MEDIUM
+
+                                </span>
+
+
+                            {% else %}
+
+
+                                <span style="
+                                    color:#aaa;
+                                    font-weight:bold;
+                                ">
+
+                                    ⚪ LOW
+
+                                </span>
+
+
+                            {% endif %}
+
+
+                        </td>
+
+
+                        <!-- IP ADDRESS -->
+
+                        <td>
+
+                            {{ anomaly.get(
+                                "ip_address",
+                                "Unknown"
+                            ) }}
+
+                        </td>
+
+
+                        <!-- USERNAME -->
+
+                        <td>
+
+                            {{ anomaly.get(
+                                "username",
+                                "Unknown"
+                            ) }}
+
+                        </td>
+
+
+                        <!-- TIMESTAMP -->
+
+                        <td>
+
+                            {{ anomaly.get(
+                                "timestamp",
+                                "Unknown"
+                            ) }}
+
+                        </td>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <td>
+
+                            {{ anomaly.get(
+                                "description",
+                                "No description available"
+                            ) }}
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        <!-- =================================================
+             NO ANOMALIES
+        ================================================== -->
+
+        {% else %}
+
+
+        <div class="empty-state">
+
+
+            <div class="empty-icon">
+                🛡️
+            </div>
+
+
+            <h3>
+                No anomalies detected
+            </h3>
+
+
+            <p>
+                The uploaded logs currently contain no
+                detected suspicious activities.
+            </p>
+
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

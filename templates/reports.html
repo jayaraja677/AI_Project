@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sentinel AI | Reports</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- BRAND -->
+
+    <div class="sidebar-brand">
+
+        <div class="sidebar-logo">
+            🛡️
+        </div>
+
+        <div>
+
+            <h2>
+                SENTINEL <span>AI</span>
+            </h2>
+
+            <small>
+                SECURITY PLATFORM
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="sidebar-nav">
+
+
+        <!-- MONITORING -->
+
+        <p class="nav-title">
+            MONITORING
+        </p>
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="nav-item">
+
+            📊
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="{{ url_for('logs') }}"
+           class="nav-item">
+
+            📁
+            <span>Log Data</span>
+
+        </a>
+
+
+        <a href="{{ url_for('anomalies') }}"
+           class="nav-item">
+
+            ⚠️
+            <span>Anomalies</span>
+
+        </a>
+
+
+        <!-- ANALYSIS -->
+
+        <p class="nav-title">
+            ANALYSIS
+        </p>
+
+
+        <a href="{{ url_for('analytics') }}"
+           class="nav-item">
+
+            📈
+            <span>Analytics</span>
+
+        </a>
+
+
+        <a href="{{ url_for('reports') }}"
+           class="nav-item active">
+
+            📄
+            <span>Reports</span>
+
+        </a>
+
+
+        <!-- SYSTEM -->
+
+        <p class="nav-title">
+            SYSTEM
+        </p>
+
+
+        <a href="{{ url_for('settings') }}"
+           class="nav-item">
+
+            ⚙️
+            <span>Settings</span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- SIDEBAR BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+
+                <strong>
+                    System Online
+                </strong>
+
+                <small>
+                    Monitoring active
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a href="{{ url_for('logout') }}"
+           class="logout-link">
+
+            🚪 Logout
+
+        </a>
+
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="dashboard-main">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+
+        <div>
+
+            <h1>
+                Security Reports
+            </h1>
+
+            <p>
+                Security analysis and incident summary
+            </p>
+
+        </div>
+
+
+        <div class="admin-area">
+
+
+            <div class="online-indicator">
+
+                <span class="status-dot"></span>
+
+                SYSTEM ONLINE
+
+            </div>
+
+
+            <div class="admin-profile">
+
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <small>
+                        Security Admin
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =================================================
+         REPORT INFORMATION
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Security Analysis Report
+                </h3>
+
+                <p>
+                    Report generated from uploaded security logs
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="report-file">
+
+            <strong>
+                Source File:
+            </strong>
+
+            {{ filename }}
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         SUMMARY STATISTICS
+    ================================================== -->
+
+    <section class="stats-grid">
+
+
+        <!-- TOTAL LOGS -->
+
+        <div class="dashboard-card stat-card">
+
+            <div class="stat-icon">
+                📄
+            </div>
+
+            <div>
+
+                <h3>
+                    Total Logs
+                </h3>
+
+                <strong>
+                    {{ total_logs }}
+                </strong>
+
+                <p>
+                    Processed records
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TOTAL ANOMALIES -->
+
+        <div class="dashboard-card stat-card">
+
+            <div class="stat-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h3>
+                    Total Anomalies
+                </h3>
+
+                <strong>
+                    {{ total_anomalies }}
+                </strong>
+
+                <p>
+                    Detected security events
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- HIGH SEVERITY -->
+
+        <div class="dashboard-card stat-card">
+
+            <div class="stat-icon">
+                🔴
+            </div>
+
+            <div>
+
+                <h3>
+                    High Severity
+                </h3>
+
+                <strong>
+                    {{ high_anomalies }}
+                </strong>
+
+                <p>
+                    High-risk anomalies
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- UNIQUE IPS -->
+
+        <div class="dashboard-card stat-card">
+
+            <div class="stat-icon">
+                🌐
+            </div>
+
+            <div>
+
+                <h3>
+                    Unique IPs
+                </h3>
+
+                <strong>
+                    {{ unique_ips }}
+                </strong>
+
+                <p>
+                    Observed addresses
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         AUTHENTICATION SUMMARY
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Authentication Summary
+                </h3>
+
+                <p>
+                    Login activity identified in the uploaded logs
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+
+            <!-- SUCCESSFUL -->
+
+            <div class="mini-stat">
+
+                <span class="mini-stat-icon">
+                    🟢
+                </span>
+
+                <div>
+
+                    <strong>
+                        {{ successful_logins }}
+                    </strong>
+
+                    <span>
+                        Successful Logins
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAILED -->
+
+            <div class="mini-stat">
+
+                <span class="mini-stat-icon">
+                    🔴
+                </span>
+
+                <div>
+
+                    <strong>
+                        {{ failed_logins }}
+                    </strong>
+
+                    <span>
+                        Failed Logins
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- MEDIUM -->
+
+            <div class="mini-stat">
+
+                <span class="mini-stat-icon">
+                    🟡
+                </span>
+
+                <div>
+
+                    <strong>
+                        {{ medium_anomalies }}
+                    </strong>
+
+                    <span>
+                        Medium Severity
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ANOMALY REPORT
+    ================================================== -->
+
+    <section class="dashboard-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Detected Security Anomalies
+                </h3>
+
+                <p>
+                    Security events identified by the detection engine
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if anomalies %}
+
+
+        <div class="log-table-container">
+
+
+            <table class="log-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Type
+                        </th>
+
+                        <th>
+                            Severity
+                        </th>
+
+                        <th>
+                            IP Address
+                        </th>
+
+                        <th>
+                            Username
+                        </th>
+
+                        <th>
+                            Timestamp
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for anomaly in anomalies %}
+
+                    <tr>
+
+                        <td>
+                            {{ anomaly.type }}
+                        </td>
+
+                        <td>
+
+                            {% if anomaly.severity == "HIGH" %}
+
+                                <span style="color:#ff4d4d; font-weight:bold;">
+                                    🔴 HIGH
+                                </span>
+
+                            {% elif anomaly.severity == "MEDIUM" %}
+
+                                <span style="color:#ffc107; font-weight:bold;">
+                                    🟡 MEDIUM
+                                </span>
+
+                            {% else %}
+
+                                {{ anomaly.severity }}
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ anomaly.ip_address }}
+                        </td>
+
+                        <td>
+                            {{ anomaly.username }}
+                        </td>
+
+                        <td>
+                            {{ anomaly.timestamp }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                ✅
+            </div>
+
+            <h3>
+                No anomalies detected
+            </h3>
+
+            <p>
+                No suspicious activity was found in the uploaded logs.
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         REPORT FOOTER
+    ================================================== -->
+
+    <section class="dashboard-card info-card">
+
+
+        <div class="info-icon">
+            🛡️
+        </div>
+
+
+        <div>
+
+            <h3>
+                Sentinel AI Security Report
+            </h3>
+
+            <p>
+                This report summarizes the security events,
+                authentication activity, IP addresses and
+                anomalies detected from the uploaded log file.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

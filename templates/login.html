@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sentinel AI | Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="login-page">
+
+
+    <!-- =====================================================
+         BRAND
+    ====================================================== -->
+
+    <div class="login-brand">
+
+
+        <div class="brand-shield">
+            🛡️
+        </div>
+
+
+        <div>
+
+            <h1>
+                SENTINEL <span>AI</span>
+            </h1>
+
+
+            <small>
+                SECURITY INTELLIGENCE PLATFORM
+            </small>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         LOGIN CARD
+    ====================================================== -->
+
+    <div class="login-card">
+
+
+        <!-- LOGIN ICON -->
+
+        <div class="login-icon">
+            🔐
+        </div>
+
+
+
+        <!-- TITLE -->
+
+        <h2>
+            Security Monitor
+        </h2>
+
+
+
+        <!-- SUBTITLE -->
+
+        <p class="login-subtitle">
+            AI-Based Security Log Anomaly Detection
+        </p>
+
+
+
+        <!-- =================================================
+             ERROR MESSAGE
+        ================================================== -->
+
+        {% if error %}
+
+        <div class="login-error">
+
+            ⚠️
+
+            <span>
+                {{ error }}
+            </span>
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- =================================================
+             LOGIN FORM
+        ================================================== -->
+
+        <form
+            action="{{ url_for('login_user') }}"
+            method="POST"
+        >
+
+
+            <!-- USERNAME -->
+
+            <label for="username">
+                USERNAME
+            </label>
+
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter administrator username"
+                autocomplete="username"
+                required
+            >
+
+
+
+            <!-- PASSWORD -->
+
+            <label for="password">
+                PASSWORD
+            </label>
+
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter secure password"
+                autocomplete="current-password"
+                required
+            >
+
+
+
+            <!-- SIGN IN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+
+                <span>
+                    SIGN IN
+                </span>
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- =================================================
+             SECURE CONNECTION
+        ================================================== -->
+
+        <div class="secure-connection">
+
+            <span></span>
+
+            SECURE CONNECTION
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
